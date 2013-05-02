@@ -1,0 +1,41 @@
+.writer-widgets {
+	padding-top: $gridGutterWidth;
+	padding-bottom: $gridGutterWidth;
+	background: $grayLighter;
+	border-bottom: 1px solid $white;
+	
+
+	.widget{
+		padding: $gridGutterWidth;
+		background: $grayLightest;
+		border-bottom: 2px solid $grayShadow;
+
+
+	}
+	.active {
+			background: $successBackground;
+			color: $successText;
+			border-bottom: 2px solid #efe;
+		}
+
+	form {
+		
+		margin: 0;
+	}
+	legend {
+		padding: 0;
+		margin-bottom: 10px;
+		-webkit-box-sizing: border-box; box-sizing: border-box; 
+		border-bottom: none;
+		text-transform: capitalize;
+		font-weight: bold;
+		color: $gray;
+	}
+	.active legend {
+		color: $successText;
+	}
+	textarea {
+		border: none;
+		width: 95%;
+	}
+}

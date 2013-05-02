@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="writer">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>STTRING - writer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directorycccccc-->
+
+        
+        <link rel="stylesheet" href="stylesheets/main.css">
+        <script src="scripts/vendor/modernizr.min.js"></script>
+    </head>
+    <body ng-controller="WriterCtrl">
+        <div id="previewScroll" class="writer-preview {{viewSettings}}" ng-class='{fit: viewText=="fit", smallView: viewText=="small", normalView: viewText=="normal", largeView: viewText=="large", enormousView: viewText=="enormous"}' ><span ng-repeat='line in previewText'>{{line.line}}</span><span class="currentText" ng-hide='hideLeft'>{{left.text}}</span><span class="currentText" ng-hide='hideRight'>{{right.text}}</span></div>
+        <div class="writer-toolbar">
+            <div class="container">
+
+                <div class="row">
+                    <div class="span5 sttring">
+                        <h1>STTR<span>ing</span></h1>
+                    </div>
+                    <div class="span7">
+                        
+                        <button class="btn btn-large pull-right" ng-click="open()"><i class="icon-cog"></i></button>
+                        <div class="btn-group" data-toggle="buttons-checkbox">
+
+                            <button type="button" class="btn btn-large" ng-model="whichWriter" btn-radio="'left'">{{left.name}}</button>
+                            
+                            <button type="button" class="btn btn-large" ng-model="whichWriter" btn-radio="'right'">{{right.name}}</button>
+                        </div>
+                    </div>
+                    
+
+                        
+                        
+                        <div modal="shouldBeOpen" close="close()" options="opts">
+                            <div class="modal-header">
+                                <h4>Viewer Settings</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Colour</h5>
+                                 <div class="btn-group" data-toggle="buttons-checkbox">
+
+                                    <button type="button" class="btn" ng-model="viewSettings" btn-radio="'darkScreen'">Screen - dark</button>
+
+                                    <button type="button" class="btn" ng-model="viewSettings" btn-radio="'lightScreen'">Screen - light</button>
+                                    
+                                    <button type="button" class="btn" ng-model="viewSettings" btn-radio="'projector'">Projector</button>
+                                </div><hr>
+                                <h5>Size</h5>
+                                <div class="btn-group" data-toggle="buttons-checkbox">
+
+                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'fit'">Fit to screen</button>
+
+                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'small'">Small</button>
+                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'normal'">Normal</button>
+                                    
+                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'large'">Large</button>
+                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'enormous'">Enormous</button>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-warning cancel" ng-click="close()">Close</button>
+                            </div>
+                        </div> 
+                    
+                </div>
+            </div>
+        </div>
+        <div class="writer-widgets">
+            <div class="container">
+                <div class="row">
+                    <div class="span5">
+                        <div class="widget" ng-class='{active: whichWriter=="left"}'>
+                            <form>
+                                <legend>{{left.name}}</legend>
+                                <textarea id="leftText" ng-model="left.text" ng-trim="false" ng-change="writing()"rows="6" autofocus></textarea>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="widget">
+                             <form>
+                                <legend>Chat</legend>
+                                <textarea rows="6"></textarea>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="span4">
+                        <div class="widget" ng-class='{active: whichWriter=="right"}'>
+                             <form>
+                                <legend>{{right.name}}</legend>
+                                <textarea id="rightText" ng-model="right.text" rows="6"></textarea>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+<!-- <p>Last Char: {{lastChar}} | Code: {{lastCharCode}} | isControl: {{isControl}}</p>
+   <p>whichWriter: {{whichWriter}}</p>
+        <p>prevWriter: {{prevWriter}}</p>
+        <p>hideLeft: {{hideLeft}}</p>
+        <p>hideRight: {{hideRight}}</p>
+        <p>nextJokeChar: {{nextJokeChar}}</p>
+        <p>isTimText: {{isTimText}}</p> -->
+
+
+
+     <!-- Add your site or application content here -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+        <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
+        <script src="js/writer.js"></script>
+        
+        
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+
+</body>
+</html>
