@@ -1,13 +1,13 @@
 angular.module('writer', ['ui.bootstrap']);
 var WriterCtrl = function ($scope, $timeout) {
   $scope.prevWriter = "";
-  $scope.whichWriter = "left";
+  $scope.whichWriter = "right";
   $scope.controlChar = "^";
   $scope.isControl = false;
 
   // button selectors
   
-  $scope.viewSettings = 'darkScreen';
+  $scope.viewSettings = 'projector';
   $scope.viewText = 'fit';
 
   $scope.hideLeft = true;
@@ -18,22 +18,14 @@ var WriterCtrl = function ($scope, $timeout) {
  
 
   //writers
-  $scope.left = {name: 'You', text: ''};
-  $scope.right = {name: 'Tim Vine', text: ''};
+  $scope.left = {name: 'You', text: '', style: ''};
+  $scope.right = {name: 'Tim Vine', text: '', style: ''};
 
   //some default text
   $scope.previewText = [];
 
-  $scope.timVineJokes = [
-    {line:'  Crime in multi-storey car parks. That is wrong on so many different levels. '},
-    {line:'  Black Beauty? He was a dark horse. '},
-    {line:'  Velcro? What a rip-off! '},
-    {line:'  I phoned the local gym and I asked if they could teach me how to do the splits. He said, "How flexible are you?" I said, "I can\'t make Tuesdays." '},
-    {line:'  Eric Bristow asked me why I put superglue on one of his darts. I said you just can\'t let it go can you? '},
-    {line:'  I\'ve just been on a once-in-a-lifetime holiday. I\'ll tell you what, never again. '}, 
-    {line:'  Conjunctivitis.com – that’s a site for sore eyes. '}
-    ];
-  $scope.whichTimVineJoke = Math.floor(Math.random() * 7);
+  $scope.timVineJokes = 
+    {line:'         \nCrime in multi-storey car parks. That is wrong on so many different levels.       \nBlack Beauty? He was a dark horse.       \nVelcro? What a rip-off!       \nI phoned the local gym and I asked if they could teach me how to do the splits. He said, "How flexible are you?" I said, "I can\'t make Tuesdays."        \nEric Bristow asked me why I put superglue on one of his darts. I said you just can\'t let it go can you?        \nI\'ve just been on a once-in-a-lifetime holiday. I\'ll tell you what, never again.        \n\rConjunctivitis.com – that’s a site for sore eyes.'};
 
 
 
@@ -43,11 +35,12 @@ var WriterCtrl = function ($scope, $timeout) {
     
     if ($scope.prevWriter != "") {
       if ($scope.whichWriter == "right") {
-        
-        timVine();
-
+        $scope.previewText.push({line: $scope.left.text, style: $scope.left.style});
+        $scope.hideLeft = true;
+        $scope.hideRight = false;
+        document.getElementById("leftText").focus(); 
       } else if ($scope.whichWriter == "left") {
-        $scope.previewText.push({line: $scope.right.text});
+        $scope.previewText.push({line: $scope.right.text, style: $scope.right.style});
         $scope.hideLeft = false;
         $scope.hideRight = true;
         document.getElementById("leftText").focus(); 
@@ -55,7 +48,9 @@ var WriterCtrl = function ($scope, $timeout) {
 
     } else {
        if ($scope.whichWriter == "right") {
-          timVine();
+        $scope.hideLeft = true;
+        $scope.hideRight = false;
+        document.getElementById("leftText").focus(); 
 
 
       } else if ($scope.whichWriter == "left") {
@@ -64,52 +59,38 @@ var WriterCtrl = function ($scope, $timeout) {
         document.getElementById("leftText").focus(); 
       }
     }
-
+    $scope.left.style = "";
     $scope.left.text = "";
     $scope.right.text = "";
     $scope.prevWriter = $scope.whichWriter;
     document.getElementById('previewScroll').scrollTop = 9999999;
 
-  };
+  }
 
-  function timVine() {
-    $scope.hideLeft = true;
-    $scope.hideRight = false;
-    timVineTypes($scope.timVineJokes[$scope.whichTimVineJoke].line);
+  $scope.$watch('whichWriter', sttringChangeWriter);
 
-    $scope.whichTimVineJoke++;
-    if($scope.whichTimVineJoke >= $scope.timVineJokes.length) { 
-        $scope.whichTimVineJoke = 0;
-      }
-    $scope.previewText.push({line: $scope.left.text});
-    document.getElementById("leftText").focus(); 
-    
-  };
 
-  function timVineTypes(timText){
+  function timVineTypes(){
     var typingObject;
-
-    $scope.isTimText = timText;
-    var theTypingTextArray = timText.split("");
+    var typePosition = 0;
+    var theTypingTextArray = $scope.timVineJokes.line.split("");
     var typingNow = function(){
 
-      if(theTypingTextArray.length > 0){
-        $scope.right.text += theTypingTextArray.shift();
+        $scope.right.text += theTypingTextArray[typePosition];
+        typePosition++;
+        if (typePosition >= theTypingTextArray.length){ typePosition = 0; }
         document.getElementById('previewScroll').scrollTop = 9999999;
-        typingObject = $timeout(typingNow,20);
-      } else {
-        $timeout.cancel(typingObject);
-        $scope.whichWriter = "left";
-
-      } 
+        document.getElementById('rightText').scrollTop = 9999999;
+        typingObject = $timeout(typingNow,60);
+  
 
     }
     typingNow();
 
+  }
+  timVineTypes();
 
-  };
 
-  $scope.$watch('whichWriter', sttringChangeWriter);
 
 
 // checking each keystroke
@@ -121,10 +102,41 @@ $scope.writing = function() {
 
   if ($scope.isControl) {
 
+
+
+
     if ($scope.lastChar === "w"){//change the Writer
       $scope.left.text = $scope.left.text.slice(0,-2);
-      $scope.whichWriter = "right";
+      if ($scope.whichWriter === "left"){
+        $scope.whichWriter = "right";
+      } else {
+        $scope.whichWriter = "left";
+      }
     }
+    if ($scope.lastChar === "b"){//change to bold
+      $scope.left.text = $scope.left.text.slice(0,-2);
+      $scope.previewText.push({line: $scope.left.text, style: $scope.left.style});
+      $scope.left.text = "";
+      $scope.left.style = "typeBold";
+    }
+    if ($scope.lastChar === "i"){//change to italic
+      $scope.left.text = $scope.left.text.slice(0,-2);
+      $scope.previewText.push({line: $scope.left.text, style: $scope.left.style});
+      $scope.left.text = "";
+      $scope.left.style = "typeItalic";
+    }
+    if ($scope.lastChar === "n"){//changeback to normal
+      $scope.left.text = $scope.left.text.slice(0,-2);
+      $scope.previewText.push({line: $scope.left.text, style: $scope.left.style});
+      $scope.left.text = "";
+      $scope.left.style = "";
+    }
+
+
+
+
+
+
     $scope.isControl = false;
   }
   if ((!$scope.isControl) && ($scope.lastChar === $scope.controlChar)){

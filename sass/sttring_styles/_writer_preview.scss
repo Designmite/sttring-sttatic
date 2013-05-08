@@ -14,7 +14,12 @@ $dark-foreground: #dd8;
 	white-space:pre-line;
 
 }
-
+.typeBold {
+	font-weight: bold;
+}
+.typeItalic {
+	font-style: italic;
+}
 .darkScreen {
 	background: $grayDarker;
 	color: $dark-foreground;

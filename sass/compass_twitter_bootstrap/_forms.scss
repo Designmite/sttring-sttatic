@@ -118,7 +118,7 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   background-color: $inputBackground;
-  border: 1px solid $inputBorder;
+  border: 1px solid $grayLightest;
   @include ctb-box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
   @include ctb-transition(#{border linear .2s, box-shadow linear .2s});
 
@@ -258,6 +258,7 @@ textarea {
 // -----------
 
 // General classes for quick sizes
+.input-tiny       { width: 1em;}
 .input-mini       { width: 60px; }
 .input-small      { width: 90px; }
 .input-medium     { width: 150px; }
@@ -403,8 +404,9 @@ select:focus:invalid {
 }
 
 .help-block {
-  display: block; // account for any element using help-block
+  display: inline-block; // account for any element using help-block
   margin-bottom: $baseLineHeight / 2;
+  font-size: 22px;
 }
 
 .help-inline {
@@ -486,6 +488,7 @@ select:focus:invalid {
 }
 
 .input-append {
+  padding-bottom: 5px;
   input,
   select,
   .uneditable-input {
@@ -531,7 +534,9 @@ select:focus:invalid {
   }
 }
 
-
+button.sttring-chat {
+  border: 1px solid $grayLightest;
+}
 
 
 // SEARCH FORM
@@ -555,6 +560,7 @@ input.search-query {
   @include ctb-border-radius(14px 0 0 14px);
 }
 .form-search .input-append .btn {
+
   @include ctb-border-radius(0 14px 14px 0);
 }
 .form-search .input-prepend .search-query {
