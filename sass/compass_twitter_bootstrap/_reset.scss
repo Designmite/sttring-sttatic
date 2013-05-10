@@ -46,6 +46,9 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+body {
+  height: 100%;
+}
 // Focus states
 a:focus {
   @include ctb-tab-focus();

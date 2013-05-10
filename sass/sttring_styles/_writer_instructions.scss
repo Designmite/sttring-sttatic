@@ -1,4 +1,12 @@
 .writer-instructions {
-	padding-top :2*$gridGutterWidth;
+	padding-top :3*$gridGutterWidth;
+	h1 {
+		padding-bottom: $gridGutterWidth;
+		color: $orange;
+		margin: 0px;
+		span {
+			color: lighten($orange, 20%);
+		}
+	}
 
 }

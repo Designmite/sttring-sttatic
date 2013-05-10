@@ -1,181 +1,194 @@
 <!DOCTYPE html>
 <html ng-app="writer">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>STTRING - writer</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>STTRING - writer</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directorycccccc-->
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directorycccccc-->
 
-        
-        <link rel="stylesheet" href="stylesheets/main.css">
-        <script src="scripts/vendor/modernizr.min.js"></script>
-    </head>
-    <body ng-controller="WriterCtrl">
-        <div id="previewScroll" class="writer-preview {{viewSettings}}" ng-class='{fit: viewText=="fit", smallView: viewText=="small", normalView: viewText=="normal", largeView: viewText=="large", enormousView: viewText=="enormous"}' ><span ng-repeat='line in previewText' class="{{line.style}}">{{line.line}}</span><span class="currentText {{left.style}}" ng-hide='hideLeft'>{{left.text}}</span><span class="currentText" ng-hide='hideRight'>{{right.text}}</span></div>
-        <div class="writer-toolbar">
-            <div class="container">
+		
+		<link rel="stylesheet" href="stylesheets/main.css">
+		<script src="scripts/vendor/modernizr.min.js"></script>
+	</head>
+	<body ng-controller="WriterCtrl">
+		<i class="{{screenSizeControl}} {{viewSettings}} previewControl" ng-class='{fit: viewText=="fit", smallView: viewText=="small", normalView: viewText=="normal", largeView: viewText=="large", enormousView: viewText=="enormous"}' ng-click="changeScreen()"></i>
 
-                <div class="row">
-                    <div class="span5 sttring">
-                        <h1>STTR<span>ing</span></h1>
-                    </div>
-                    <div class="span7">
-                        
-                        <button class="btn btn-large pull-right" ng-click="open()"><i class="icon-cog"></i></button>
-                        <div class="btn-group" data-toggle="buttons-checkbox">
+		<div id="previewScroll" class="writer-preview {{viewSettings}} {{fullHeight}}"  ng-class='{fit: viewText=="fit", smallView: viewText=="small", normalView: viewText=="normal", largeView: viewText=="large", enormousView: viewText=="enormous"}' ><span ng-repeat='line in previewText' class="{{line.style}}">{{line.line}}</span><span class="currentText {{left.style}}" ng-hide='hideLeft'>{{left.text}}</span><span class="currentText" ng-hide='hideRight'>{{right.text}}</span></div>
+		<div class="writer-toolbar">
+			<div class="container">
 
-                            <button type="button" class="btn btn-large" ng-model="whichWriter" btn-radio="'left'">{{left.name}}</button>
-                            
-                            <button type="button" class="btn btn-large" ng-model="whichWriter" btn-radio="'right'">{{right.name}}</button>
-                        </div>
-                    </div>
-                    
+				<div class="row">
+					<div class="span5 sttring">
+						<h1>STTR<span>ing</span></h1>
+					</div>
+					<div class="span7">
+						
+						<button class="btn btn-large pull-right" ng-click="open()"><i class="icon-cog"></i></button>
+						<div class="btn-group" data-toggle="buttons-checkbox">
 
-                        
-                        
-                        <div modal="shouldBeOpen" close="close()" options="opts">
-                            <div class="modal-header">
-                                <h4>Viewer Settings</h4>
-                            </div>
-                            <div class="modal-body">
-                                <h5>Colour</h5>
-                                 <div class="btn-group" data-toggle="buttons-checkbox">
+							<button type="button" class="btn btn-large" ng-model="whichWriter" btn-radio="'left'">{{left.name}}</button>
+							
+							<button type="button" class="btn btn-large" ng-model="whichWriter" btn-radio="'right'">{{right.name}}</button>
+						</div>
+					</div>
+					
 
-                                    <button type="button" class="btn" ng-model="viewSettings" btn-radio="'darkScreen'">Screen - dark</button>
+						
+						
+						<div modal="shouldBeOpen" close="close()" options="opts">
+							<div class="modal-header">
+								<h4>Viewer Settings</h4>
+							</div>
+							<div class="modal-body">
+								<h5>Colour</h5>
+								 <div class="btn-group" data-toggle="buttons-checkbox">
 
-                                    <button type="button" class="btn" ng-model="viewSettings" btn-radio="'lightScreen'">Screen - light</button>
-                                    
-                                    <button type="button" class="btn" ng-model="viewSettings" btn-radio="'projector'">Projector</button>
-                                </div><hr>
-                                <h5>Size</h5>
-                                <div class="btn-group" data-toggle="buttons-checkbox">
+									<button type="button" class="btn" ng-model="viewSettings" btn-radio="'darkScreen'">Screen - dark</button>
 
-                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'fit'">Fit to screen</button>
+									<button type="button" class="btn" ng-model="viewSettings" btn-radio="'lightScreen'">Screen - light</button>
+									
+									<button type="button" class="btn" ng-model="viewSettings" btn-radio="'projector'">Projector</button>
+								</div><hr>
+								<h5>Size</h5>
+								<div class="btn-group" data-toggle="buttons-checkbox">
 
-                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'small'">Small</button>
-                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'normal'">Normal</button>
-                                    
-                                    <button type="button" class="btn" ng-model="viewText" btn-radio="'large'">Large</button>
+									<button type="button" class="btn" ng-model="viewText" btn-radio="'fit'">Fit to screen</button>
 
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-warning cancel" ng-click="close()">Close</button>
-                            </div>
-                        </div> 
-                    
-                </div>
-            </div>
-        </div>
-        <div class="writer-widgets">
-            <div class="container">
-                <div class="row">
-                    <div class="span5">
-                        <div class="widget" ng-class='{active: whichWriter=="left"}'>
-                            <form>
-                                <legend>{{left.name}}</legend>
-                                <textarea id="leftText" ng-model="left.text" ng-trim="false" ng-change="writing()"rows="7" autofocus></textarea>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <div class="widget">
-                             <form>
-                                <legend>Chat</legend>
-                                <textarea rows="5"></textarea>
-                                <div class="input-append">
-                                  <input class="span2" id="appendedInputButton" type="text">
-                                  <button class="btn sttring-chat" type="button"><i class="icon-comment-alt"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+									<button type="button" class="btn" ng-model="viewText" btn-radio="'small'">Small</button>
+									<button type="button" class="btn" ng-model="viewText" btn-radio="'normal'">Normal</button>
+									
+									<button type="button" class="btn" ng-model="viewText" btn-radio="'large'">Large</button>
 
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-warning cancel" ng-click="close()">Close</button>
+							</div>
+						</div> 
+					
+				</div>
+			</div>
+		</div>
+		<div class="writer-widgets">
+			<div class="container">
+				<div class="row">
+					<div class="span5">
+						<div class="widget" ng-class='{active: whichWriter=="left"}'>
+							<form>
+								<legend>{{left.name}}</legend>
+								<textarea id="leftText" ng-model="left.text" ng-trim="false" ng-change="writing()" rows="7" autofocus></textarea>
+							</form>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="widget">
+							<form>
+								<legend>Chat <i class="icon-comment-alt" ></i></legend>
+								<ul class="chatHistory unstyled" id="chatHook">
+									<li ng-repeat="chat in chatHistory" ng-class="{otherWriter: chat.by === right.name}">
+										{{chat.line}}
+									</li>
+								</ul>
 
-                    <div class="span4">
-                        <div class="widget" ng-class='{active: whichWriter=="right"}'>
-                             <form>
-                                <legend>{{right.name}}</legend>
-                                <textarea id="rightText" ng-model="right.text" rows="7"></textarea>
-                            </form>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="writer-instructions">
-            <div class="container">
-                <div class="row">
-                    <div class="span8">
+								<textarea ng-model="currentChat" id="currentChat" ng-trim="false" ng-change="chatting()"rows="2"></textarea>
+								
+							</form>
+						</div>
+					</div>
 
 
-                            <div id="disqus_thread"></div>
-                                <script type="text/javascript">
-                                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                                    var disqus_shortname = 'sttring'; // required: replace example with your forum shortname
+					<div class="span4">
+						<div class="widget" ng-class='{active: whichWriter=="right"}'>
+							 <form>
+								<legend>{{right.name}}</legend>
+								<textarea id="rightText" ng-model="right.text" rows="7"></textarea>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="writer-instructions">
+			<div class="container">
+				<div class="row">
+					<div class="span7">
+						<h1>STTR<span>ing demo</span></h1>
 
-                                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                                    (function() {
-                                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                                    })();
-                                </script>
-                                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-                       
-                    </div>  
-                    <div class="span4">
-                        
-                       <input class="input-tiny" type="text" ng-model="controlChar"> <span class="help-block"> Keyboard control character</span> 
-                       <div class="well well-small">
-                       <dl class="dl-horizontal">
-                          <dt>{{controlChar}}w</dt>
-                            <dd>Switches writer</dd>
-                          <dt>{{controlChar}}b</dt>
-                            <dd>Changes font weight to bold</dd>
-                          <dt>{{controlChar}}i</dt>
-                            <dd>Changes font style to italic</dd>
-                          <dt>{{controlChar}}n</dt>
-                            <dd>Returns the font to normal</dd>
-                        </dl>
-                       </div>
-                    </div>
+						<p>To help show how the interaction works we have the computer churning out a constant feed of good jokes to play the part of one writer.  </p>
+
+						<h4>Instructions</h4>
+						<p></p>
 
 
-                </div>
-            </div>
-        </div>
+						<hr><div id="disqus_thread"></div>
+								<script type="text/javascript">
+									/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+									var disqus_shortname = 'sttring'; // required: replace example with your forum shortname
+
+									/* * * DON'T EDIT BELOW THIS LINE * * */
+									(function() {
+										var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+										dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+										(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+									})();
+								</script>
+								<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+					   
+					</div>  
+					<div class="span4 offset1">
+						
+					   <input class="input-tiny" type="text" ng-model="controlChar"> <span class="help-block"> Keyboard control character</span> 
+					   <div class="well well-small">
+					   <dl class="dl-horizontal">
+						  <dt>{{controlChar}}w</dt>
+							<dd>Switches writer</dd>
+						  <dt>{{controlChar}}c</dt>
+							<dd>Moves to chat</dd>
+						  <dt>{{controlChar}}b</dt>
+							<dd>Changes font weight to bold</dd>
+						  <dt>{{controlChar}}i</dt>
+							<dd>Changes font style to italic</dd>
+						  <dt>{{controlChar}}n</dt>
+							<dd>Returns the font to normal</dd>
+						</dl>
+					   </div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
 <!-- <p>Last Char: {{lastChar}} | Code: {{lastCharCode}} | isControl: {{isControl}}</p>
    <p>whichWriter: {{whichWriter}}</p>
-        <p>prevWriter: {{prevWriter}}</p>
-        <p>hideLeft: {{hideLeft}}</p>
-        <p>hideRight: {{hideRight}}</p>
-        <p>nextJokeChar: {{nextJokeChar}}</p>
-        <p>isTimText: {{isTimText}}</p> -->
+		<p>prevWriter: {{prevWriter}}</p>
+		<p>hideLeft: {{hideLeft}}</p>
+		<p>hideRight: {{hideRight}}</p>
+		<p>nextJokeChar: {{nextJokeChar}}</p>
+		<p>isTimText: {{isTimText}}</p> -->
 
 
 
-     <!-- Add your site or application content here -->
+	 <!-- Add your site or application content here -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-        <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
-        <script src="js/writer.js"></script>
-        
-        
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+		<script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
+		<script src="js/writer.js"></script>
+		
+		
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<script>
+			var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script>
 
 </body>
 </html>

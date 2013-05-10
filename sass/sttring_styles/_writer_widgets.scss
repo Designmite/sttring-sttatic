@@ -38,4 +38,16 @@
 		border: none;
 		width: 95%;
 	}
+	ul {
+		height: 6.4em;
+		overflow: scroll;
+	}
+	li {
+		font-style: italic;
+	}
+	li.otherWriter {
+		font-style: normal;
+		text-align: right;
+		font-weight: bold;
+	}
 }
