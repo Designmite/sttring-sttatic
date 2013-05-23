@@ -110,7 +110,7 @@ var WriterCtrl = function ($scope, $timeout) {
 		  document.getElementById('previewScroll').scrollTop = 9999999;
 		  document.getElementById('chatHook').scrollTop = 9999999;
 		  document.getElementById('rightText').scrollTop = 9999999;
-		  typingObject = $timeout(typingNow,60); 
+		  typingObject = $timeout(typingNow,80); 
 
 	 }
 	 typingNow();
