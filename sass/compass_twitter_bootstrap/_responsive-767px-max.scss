@@ -42,6 +42,8 @@
   // Remove width from containers
   .container {
     width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   // Fluid rows
   .row-fluid {

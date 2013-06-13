@@ -115,43 +115,11 @@
 		<div class="writer-instructions">
 			<div class="container">
 				<div class="row">
-					<div class="span7">
-						<h1>STTR<span>ing demo</span></h1>
-
-						<p>To help show how the interaction works we have the computer churning out a constant feed of good jokes to play the part of one writer.  </p>
-						<p><em>(This demo has been written for Google Chrome and not tested in any other browsers. I'd expect <strong>ie</strong> to be somewhat quirky!)</em></p>
-						<hr>
-
-						<h4>Instructions</h4>
-						<ul>
-							<li>Press one of the buttons just under the preview window to make one of the writers, 'active'.</li>
-							<li>You can change the keyboard control character to whatever is convenient.</li>
-							<li>Just generally play around with it and if you have the time I'd love some feedback! There's a comment thing below.</li>
-						</ul>
-						<p></p>
-
-
-						<hr><div id="disqus_thread"></div>
-								<script type="text/javascript">
-									/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-									var disqus_shortname = 'sttring'; // required: replace example with your forum shortname
-
-									/* * * DON'T EDIT BELOW THIS LINE * * */
-									(function() {
-										var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-										dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-										(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-									})();
-								</script>
-								<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-								<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-	
-					   
-					</div>  
-					<div class="span4 offset1">
+					<div class="span4">
 						
-					   <input class="input-tiny" type="text" ng-model="controlChar"> <span class="help-block"> Keyboard control character</span> 
+					   <span class="help-block"> Keyboard Control</span> <input class="input-tiny" type="text" ng-model="controlChar"> 
 					   <div class="well well-small">
+					   	<h6>Feel free to change the keyboard control character</h6>
 					   <dl class="dl-horizontal">
 						  <dt>{{controlChar}}w</dt>
 							<dd>Switches writer</dd>
@@ -165,7 +133,67 @@
 							<dd>Returns the font to normal</dd>
 						</dl>
 					   </div>
+
+
+						<h1>Instructions</h1>
+						<ul>
+							<li>To help show how the interaction works we have the computer churning out a constant feed of good jokes to play the part of one writer.  </li>
+							<li>Press the buttons just under the preview window to choose which writer is, 'active'.</li>
+							<li>The cog towards the top right has some default settings for the preview window.</li>
+							<li>You can change the keyboard control character to whatever is convenient.</li>
+							<li>Just generally play around with it and if you have the time I'd love some feedback! There's a comment thing below.</li>
+						</ul>
+						<hr>
+						<h1>Comments</h1>
+					   <div id="disqus_thread"></div>
+								<script type="text/javascript">
+									/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+									var disqus_shortname = 'sttring'; // required: replace example with your forum shortname
+
+									/* * * DON'T EDIT BELOW THIS LINE * * */
+									(function() {
+										var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+										dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+										(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+									})();
+								</script>
+								<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 					</div>
+
+					<div class="span7 offset1">
+						<h1>STTR<span>ing demo</span></h1>
+						<p>This is a prototype demo/design test that I have put online mainly to get feedback from people who may potentially use it. Enjoy!</p>
+						<p><em>(This demo has been written for Google Chrome and not tested in any other browsers. I'd expect <strong>ie</strong> to be somewhat quirky!)</em></p>
+						
+
+
+						<hr>
+						<h1>FAQ</h1>
+						<ol>
+							<li><strong>Why is there a feed of Tim Vine going on?</strong><p>
+							For the purposes of this demo, I wanted there to be a second writer typing away. This shows that only the active writer is sending their feed to the main screen.</p></li>
+							<li><strong>How is it different from Streamtext?</strong><p>
+								It will be much simpler to set up new sessions. I'm hoping to improve on the interactions between the writers. But really I'm still designing it, so what I'd like to do is flip the question around and ask how would you like it to be different to Streamtext? <em>Oh, and I have no plans to charge for the service!</em></p></li>
+							<li><strong>Do you have to be online to use it?</strong><p>Yes, for the first version anyway. This will be run across an internet server although I'm just starting to work out what an offline solution could consist of! Hmmmm.</p></li>
+							<li><strong>What is the advantage over using a switching box?</strong><p>The first advantage is the seamlessness of the transition between writers.</p><p>The second advantage is it frees the writer from having to be wired up to a box in the room.</p></li>
+							<li><strong>Will I need to take extra hardware with me to a job?</strong><p>No. This is a software based solution.</p></li>
+							<li><strong>Who initiates the change between reporters?</strong><p>I was thinking either reporter could do it. I can't really see a benefit in limiting this. I'd like some opinions on this though!</p></li>
+							<li><strong>How do I input into the text box (keyboard macro, TCP/IP, virtual serial port)?</strong><p>Either of the first two. For this demo you would have to use a keyboard emulator but the finished software will accept an input over TCP/IP.</p></li>
+							<li><strong>Do both reporters see the same page, even on different computers?</strong><p>They see a similar page but sort of mirrored. Each reporter will have their own feed on the left and the other feed on the right.</p></li>
+							<li><strong>Do I need to have the page open, or can I work in my own software?</strong><p>You would not need to keep the page open when sending your feed over TCP/IP. Obviously it would have to stay open when using a keyboard emulator.</p></li>
+							<li><strong>Is there any chance of the words going off the page?</strong><p>Only by placing the browser window of the edge of your screen.</p></li>
+							<li><strong>I see you can change the size and font of the letters.  What about the line height?</strong><p>Hmmm. Not at the moment but it would be quite trivial to include. Should there be?</p></li>
+							<li><strong>Can you toggle back out of chat with a keyboard character?</strong><p>At the moment this is set that when you send a line of chat the focus immediately returns to your feed window.</p></li>
+							<li><strong>Could it be used with a scaler or on top of a presentation?</strong><p>This is something I'm looking into now. Don't see why not.</p></li>
+							<li><strong>Do I need to download anything to use it?</strong><p>You need to will need to have a fairly modern browser. I am building this in Google Chrome and then will go on to make sure it functions in as many browsers as possible but I don't think it will function very well pre version 9 of internet explorer.</p></li>
+						</ol>
+
+
+					
+	
+					   
+					</div>  
 
 
 				</div>

@@ -1,7 +1,7 @@
 angular.module('writer', ['ui.bootstrap']);
 var WriterCtrl = function ($scope, $timeout) {
   $scope.prevWriter = '';
-  $scope.whichWriter = '';
+  $scope.whichWriter = 'left';
   $scope.controlChar = '^';
   $scope.isControl = false;
   $scope.fullHeight ="";
